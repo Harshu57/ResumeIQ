@@ -1,0 +1,120 @@
+l
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResumeIQ | AI Resume Analyzer</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#0b1020;color:#f4f6ff}
+nav{height:75px;padding:0 8%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #252c40}
+.logo{font-size:25px;font-weight:bold;color:#8b9cff}
+.logo span{color:white}
+nav a{color:#aab3ca;text-decoration:none;margin-left:25px}
+.hero{text-align:center;padding:65px 20px 35px}
+.tag{color:#9caaff;background:#20294c;padding:9px 17px;border-radius:25px;font-size:13px}
+h1{font-size:48px;margin:25px 0 15px}
+h1 span{color:#899cff}
+.hero p{color:#a5aec4;line-height:1.7}
+.container{max-width:950px;margin:25px auto;padding:0 20px}
+.panel{background:#141c30;border:1px solid #29344e;border-radius:16px;padding:28px}
+h2{font-size:21px;margin-bottom:22px}
+label{display:block;margin:20px 0 10px;color:#dce2f4;font-size:14px}
+.upload{border:2px dashed #596caa;border-radius:12px;text-align:center;padding:30px;cursor:pointer;background:#10182b}
+.upload:hover{border-color:#91a4ff}
+.upload .symbol{font-size:35px;margin-bottom:10px}
+.upload p{color:#aab4ce;font-size:13px;margin-top:8px}
+input[type=file]{display:none}
+textarea{width:100%;height:125px;background:#0d1425;border:1px solid #34405c;border-radius:9px;padding:14px;color:white;resize:vertical;font:14px Arial}
+button{width:100%;padding:16px;margin-top:22px;border:0;border-radius:9px;background:linear-gradient(90deg,#637bff,#9b70f7);color:white;font-weight:bold;font-size:16px;cursor:pointer}
+button:hover{opacity:.9}
+#result{display:none;margin-top:25px}
+.score{font-size:48px;color:#91a4ff;font-weight:bold}
+.skills{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}
+.skills span{background:#243553;color:#a9caff;padding:9px 13px;border-radius:20px;font-size:13px}
+.resultText{color:#b8c2d9;line-height:1.8;margin-top:10px}
+footer{text-align:center;padding:35px;color:#75819c;font-size:13px}
+@media(max-width:600px){h1{font-size:34px}nav{padding:0 5%}nav a{margin-left:10px;font-size:12px}.panel{padding:19px}}
+</style>
+</head>
+<body>
+<nav>
+<div class="logo">Resume<span>IQ.</span></div>
+<div><a href="#analyzer">Analyzer</a><a href="#about">About</a></div>
+</nav>
+
+<section class="hero">
+<span class="tag">✦ AI-POWERED CAREER ASSISTANT</span>
+<h1>Make Your Resume <span>Stand Out.</span></h1>
+<p>Analyze your resume, discover skill gaps and improve your<br>
+job compatibility with intelligent resume analysis.</p>
+</section>
+
+<main class="container" id="analyzer">
+<div class="panel">
+<h2>🚀 Analyze Your Resume</h2>
+
+<label>Upload your resume</label>
+<label class="upload" for="resume">
+<div class="symbol">📄</div>
+<strong id="fileName">Click to upload your resume</strong>
+<p>PDF or DOCX format supported</p>
+<p>Maximum file size: 5 MB</p>
+</label>
+<input type="file" id="resume" accept=".pdf,.docx">
+
+<label>Paste Job Description</label>
+<textarea id="job" placeholder="Paste the job description here..."></textarea>
+
+<button onclick="analyze()">✦ Analyze My Resume</button>
+
+<div id="result">
+<hr style="border-color:#34405c;margin:25px 0">
+<h2>Analysis Results</h2>
+<p class="resultText">Estimated compatibility score</p>
+<div class="score">85%</div>
+<h3 style="margin-top:20px">Matched Skills</h3>
+<div class="skills"><span>Python</span><span>Flask</span><span>MySQL</span><span>HTML</span><span>JavaScript</span></div>
+<h3>Improvement Suggestions</h3>
+<p class="resultText">• Add measurable achievements to your projects.<br>
+• Highlight relevant technical skills.<br>
+• Include keywords from the job description.<br>
+• Improve your professional summary.</p>
+<p class="resultText" style="color:#899cff">Demo analysis only. Real AI analysis will be integrated in a future update.</p>
+</div>
+</div>
+</main>
+
+<footer id="about">
+© 2026 ResumeIQ. Built with Python, Flask & AI in mind.
+<br><br>Smarter Resumes. Better Opportunities.
+</footer>
+
+<script>
+const resume=document.getElementById("resume");
+
+resume.addEventListener("change",()=>{
+ const file=resume.files[0];
+ if(!file)return;
+ if(file.size>5*1024*1024){
+ alert("File must be smaller than 5 MB.");
+ resume.value="";
+ return;
+ }
+ document.getElementById("fileName").textContent=file.name;
+});
+
+function analyze(){
+ const file=resume.files[0];
+ const job=document.getElementById("job").value.trim();
+
+ if(!file){alert("Please upload your resume first.");return;}
+ if(!job){alert("Please paste a job description.");return;}
+
+ document.getElementById("result").style.display="block";
+ document.getElementById("result").scrollIntoView({behavior:"smooth"});
+}
+</script>
+</body>
+</html>
